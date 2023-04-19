@@ -6,3 +6,8 @@ API de gestão de condomínio
 
 # Rodar API na porta 3000
 `nodemon server.js`
+
+# Fazer:
+documentacao swageer
+corrigir res, send no repository
+conexao com api externa reservations e ViaCep

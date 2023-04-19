@@ -1,8 +1,28 @@
-const residentRepository = require('../services/residentService');
+const residentRepository = require('../repositories/residentRepository');
 
-function createResidentService(req, res) {
-    const { name, birth_date, residence_number, floor, block  } = req.body;
-    residentRepository.create( name, birth_date, residence_number, floor, block )
+async function createResidentService(req) {
+    console.log(req.body)
+
+    var { name, birth_date, residence_number, floor, block  } = req.body;
+    // verificações
+    return await residentRepository.create( name, birth_date, residence_number, floor = null, block = null )
 }
 
-module.exports = { createResidentService };
+async function getAllResidentsService () {
+    return await residentRepository.get();
+}
+
+async function getResidentByIdService(req) {
+    return await residentRepository.get(req.params.id)
+}
+
+function deleteResidentService(req) {
+    residentRepository.destroy(req.params.id)
+}
+
+function updateResidentService(req) {
+    const { name, birth_date, residence_number, floor, block  } = req.body;
+    residentRepository.update(req.params.id, name, birth_date, residence_number, floor, block)
+}
+
+module.exports = { createResidentService, getAllResidentsService, getResidentByIdService, deleteResidentService, updateResidentService };

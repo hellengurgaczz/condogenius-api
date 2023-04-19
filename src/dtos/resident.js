@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const database = require('../../../db');
+const database = require('../database/db');
  
 const Resident = database.define('residents', {
     id: {
@@ -27,5 +27,14 @@ const Resident = database.define('residents', {
         type: Sequelize.STRING
     }
 })
+
+// cria a tabela no banco de dados
+Resident.sync()
+    .then(() => {
+        console.log('Tabela criada com sucesso!');
+    })
+    .catch((error) => {
+        console.error('Erro ao criar tabela:', error);
+    });
  
 module.exports = Resident;
