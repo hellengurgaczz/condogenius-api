@@ -9,10 +9,9 @@ async function create(name, birth_date, residence_number, floor, block) {
             floor: floor,
             block: block
         });
-        
+
         return resident;
     } catch ( error ) {
-        console.log(error)
         throw new Error('Falha ao cadastrar morador.');
     }
 }

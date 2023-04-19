@@ -31,10 +31,10 @@ const Resident = database.define('residents', {
 // cria a tabela no banco de dados
 Resident.sync()
     .then(() => {
-        console.log('Tabela criada com sucesso!');
+        console.log('Tabela residents criada com sucesso!');
     })
     .catch((error) => {
-        console.error('Erro ao criar tabela:', error);
+        console.error('Erro ao criar tabela residents:', error);
     });
  
 module.exports = Resident;

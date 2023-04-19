@@ -1,8 +1,6 @@
 const residentRepository = require('../repositories/residentRepository');
 
 async function createResidentService(req) {
-    console.log(req.body)
-
     var { name, birth_date, residence_number, floor, block  } = req.body;
     // verificações
     return await residentRepository.create( name, birth_date, residence_number, floor = null, block = null )
