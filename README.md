@@ -8,7 +8,4 @@ API de gestão de condomínio
 `nodemon server.js`
 
 # Fazer:
-corrigir res, send, errors, etc -  res.status(status).send(body)
-Validacoes de revebimento de params
 documentacao swageer
-areas tabela criar
