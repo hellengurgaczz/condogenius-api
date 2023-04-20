@@ -7,9 +7,9 @@ async function create(name, address) {
             address
         });
 
-        return res.status(200).send(condominium)
+        return condominium;
     } catch ( error ) {
-        return res.status(500).send(error)
+        throw new Error('Falha ao cadastrar condomínio')
     }
 }
 

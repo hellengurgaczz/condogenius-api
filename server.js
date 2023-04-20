@@ -26,64 +26,97 @@ server.get('/', (_, res) => {
 
 server.post('/resident', async (req, res) => {
     try {
-        resident = await residentService.createResidentService(req)
-        res.send(`Morador ${resident.name } cadastrado com sucesso`)
+        const response = await residentService.createResidentService(req)
+        res.status(200).send({
+            message: 'Morador cadastrado com sucesso.',
+            data: response
+        });
     } catch (error) {
-        res.send(error)
+        res.status(500).send({
+            error: error.message
+        });
     }
 });
 
 server.get('/resident', async (_, res) => {
     try {
-        residents = await residentService.getAllResidentsService()
-        res.send(residents)
+        response = await residentService.getAllResidentsService()
+        res.status(200).send({
+            data: response
+        });
     } catch (error) {
-        res.send(error)
+        res.status(500).send({
+            error: error.message
+        });
     }
 });
 
 server.get('/resident/:id', async (req, res) => {
     try {
-        resident = await residentService.getResidentByIdService(req)
-        res.send(resident)
+        const response = await residentService.getResidentByIdService(req)
+        res.status(200).send({
+            data: response
+        });
     } catch (error) {
-        res.send(error)
+        res.status(500).send({
+            error: error.message
+        });
     }
 });
 
 
 server.delete('/resident/:id', (req, res) => {
     try {
-        residentService.deleteResidentService(req)
-        res.send('Morador deletado com sucesso.')
+        const response = residentService.deleteResidentService(req)
+        res.status(200).send({
+            message: 'Morador deletado com sucesso.',
+            data: response
+        });
     } catch (error) {
-        res.send(error)
+        res.status(500).send({
+            error: error.message
+        });
     }
 });
 
 server.put('/resident/:id', (req, res) => {
     try {
-        residentService.updateResidentService(req)
-        res.send('Morador atualizado com sucesso.')
+        const response = residentService.updateResidentService(req)
+        res.status(200).send({
+            message: 'Morador atualizado com sucesso!',
+            data: response
+        });
     } catch (error) {
-        res.send(error)
+        res.status(500).send({
+            error: error.message
+        });
     }
 });
 
 server.post('/condominium', async (req, res) => {
     try {
-        response = await condominiumService.createCondominiumService(req)
-        res.send(`Condominio cadastrado com sucesso!`, response)
+        const response = await condominiumService.createCondominiumService(req);
+        res.status(200).send({
+            message: 'Condomínio cadastrado com sucesso!',
+            data: response
+        });
     } catch (error) {
-        res.send(error)
+        res.status(500).send({
+            error: error.message
+        });
     }
 });
 
 server.post('/reservations', async(req,res) => {
     try {
-        response = await reservationsService.createReservationService(req)
-        res.status(200).send('Reserva realizada com sucesso!')
+        const response = await reservationsService.createReservationService(req);
+        res.status(200).send({
+            message:'Reserva realizada com sucesso!',
+            data: response
+        });
     } catch (error) {
-        res.send(error)
+        res.status(500).send({
+            error: error.message
+        });
     }
 })

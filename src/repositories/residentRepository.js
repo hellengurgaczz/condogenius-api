@@ -12,7 +12,7 @@ async function create(name, birth_date, residence_number, floor, block) {
 
         return resident;
     } catch ( error ) {
-        throw new Error('Falha ao cadastrar morador.');
+        throw new Error('Falha ao cadastrar morador.')
     }
 }
 
@@ -22,42 +22,60 @@ async function get(id) {
             const resident = await Resident.findByPk(id);
             return resident;
         } catch (error) {
-            throw new Error('Falha ao buscar morador.');
+            throw new Error('Falha ao buscar morador.')
         }
     } else {
         try {
             const residents = await Resident.findAll();
             return residents;
         } catch (error) {
-            console.log(error)
-            throw new Error('Falha ao buscar moradores.');
+            throw new Error('Falha ao buscar moradores.')
         }
     }
 }
 
 async function destroy(id) {
-    Resident.destroy({
-        where: { id: id }
-      })
-      .catch(error => {
-        console.log(error)
-        throw new Error('Erro ao deletar morador:', error);
-      });
+    try {
+        const result = await Resident.destroy({
+            where: { id: id }
+        })
+
+        if (result === 1) {
+            return {
+              message: 'Morador deletado com sucesso.'
+            }
+          } else {
+            throw new Error('Morador não encontrado.')
+        }
+    } catch (error) {
+        throw new Error('Falha ao deletar morador.')
+    
+    }
 }
 
 async function update(id, name, birth_date, residence_number, floor, block) {
-    Resident.update({
-        name: name,
-        birth_date: birth_date,
-        residence_number: residence_number,
-        floor: floor,
-        block: block
-      }, {
-        where: { id: id }
-      }).catch(error => {
-        console.log(error)
-        throw new Error('Erro ao atualizar morador:', error);
-      });
+
+    try {   
+        const result = Resident.update({
+            name: name,
+            birth_date: birth_date,
+            residence_number: residence_number,
+            floor: floor,
+            block: block
+          }, {
+            where: { id: id }
+        });
+
+        if (result === 1) {
+            return {
+              message: 'Morador atualizado com sucesso.'
+            }
+          } else {
+            throw new Error('Morador não encontrado.')
+        }
+    } catch (error){
+        throw new Error('Falha ao atualizar morador.')
+    }
 }
 
 

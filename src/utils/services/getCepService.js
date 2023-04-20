@@ -6,8 +6,7 @@ async function getCep(cep) {
         const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`)
         return response.data
     } catch(error) {
-        console.error(error)
-        return error
+        throw new Error('Falha ao buscar CEP')
     }
 
 }
