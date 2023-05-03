@@ -5,6 +5,7 @@ const server = express();
 const bodyParser = require('body-parser');
 
 const swaggerJsdoc = require('swagger-jsdoc');
+const swaggerJson = require('./swagger.json');
 const swaggerUi = require('swagger-ui-express');
 const path = require('path');
 
@@ -24,21 +25,21 @@ server.use(
 )
 
 // Configuração do Swagger
-const swaggerOptions = {
-    swaggerDefinition: {
-      openapi: '3.0.0',
-      info: {
-        title: 'API Condogenius',
-        description: 'API de gestão de condomínio Condogenius',
-        version: '1.0.0',
-      },
-    },
-    apis: [path.join(__dirname, '*.js')],
-  };
+// const swaggerOptions = {
+//     swaggerDefinition: {
+//       openapi: '3.0.0',
+//       info: {
+//         title: 'API Condogenius',
+//         description: 'API de gestão de condomínio Condogenius',
+//         version: '1.0.0',
+//       },
+//     },
+//     apis: [path.join(__dirname, '*.js')],
+//   };
 
-  const swaggerSpec = swaggerJsdoc(swaggerOptions);
+//   const swaggerSpec = swaggerJsdoc(swaggerOptions);
 
- server.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+server.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerJson));
 
 // Routes
 
@@ -46,17 +47,7 @@ server.get('/', (_, res) => {
     res.send('Servidor condogenius ok!')
 });
 
-/**
- * @swagger
- * /resident:
- *   post:
- *     summary: Cadastra moradores
- *     description: Rota para cadastro de morador
- *     responses:
- *       200:
- *         description: Morador cadastrado com sucesso.
- *        
- */
+
 server.post('/resident', async (req, res) => {
     try {
         const response = await residentService.createResidentService(req)
@@ -71,20 +62,6 @@ server.post('/resident', async (req, res) => {
     }
 });
 
-/**
- * @swagger
- * /resident:
- *   get:
- *     summary: Lista todos os moradores
- *     description: Retorna uma lista de todos os moradores cadastrados
- *     responses:
- *       200:
- *         description: OK
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- */
 server.get('/resident', async (_, res) => {
     try {
         response = await residentService.getAllResidentsService()
@@ -110,7 +87,6 @@ server.get('/resident/:id', async (req, res) => {
         });
     }
 });
-
 
 server.delete('/resident/:id', (req, res) => {
     try {

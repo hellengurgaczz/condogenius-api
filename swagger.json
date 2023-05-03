@@ -1,0 +1,355 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Condogenius",
+        "description": "API de gestão de condomínio Condogenius",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/resident": {
+            "post":{
+                "summary": "Cadastra moradores",
+                "description": "Rota para cadastro de morador",
+                "tags": ["Residents"],
+                "security": [{"baererAuth": []}],
+                "requestBody": { 
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Resident"
+                            },
+                            "examples": {
+                                "resident": {
+                                    "value": {
+                                        "name": "Carlos Eduardo Junior",
+                                        "birth_date": "2023-05-03T14:30:00.000Z",
+                                        "residence_number": 2,
+                                        "floor": 1,
+                                        "block": "A"
+                                    }
+                                }
+                            } 
+                        }
+                    }
+                },
+                "responses": {
+                    "401": {
+                        "description": "Não autorizado"
+                    },
+                    "400": {
+                        "description": "Morador já existe!"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "items": {
+                                    "$ref": "#/components/schemas/Resident"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Lista todos os moradores",
+                "description": "Rota para listar os moradores",
+                "tags": ["Residents"],
+                "security": [{"bearerAuth": []}],
+                "responses": {
+                  "200": {
+                    "description": "Lista de moradores",
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Resident"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "401": {
+                    "description": "Não autorizado"
+                  },
+                  "500": {
+                    "description": "Erro interno do servidor"
+                  }
+                }
+            }
+        },
+        "/resident/{id}": {
+            "get": {
+                "summary": "Busca morador por id",
+                "description": "Rota para buscar morador por id",
+                "tags": ["Residents"],
+                "parameters":[ {
+                    "name": "id",
+                    "in": "path",
+                    "description": "Id do morador",
+                    "required": true
+                }],
+                "security": [{"bearerAuth": []}],
+                "responses": {
+                    "200": {
+                        "description": "Morador encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Resident"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Não autorizado"
+                    },
+                    "404": {
+                        "description": "Morador não encontrado"
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor"
+                    }
+                }
+            },
+            "put": {
+                "summary": "Atualiza um morador por id",
+                "description": "Rota para atualizar um morador por id",
+                "tags": ["Residents"],
+                "parameters":[ 
+                  {
+                    "name": "id",
+                    "in": "path",
+                    "description": "Id do morador",
+                    "required": true
+                  }
+                ],
+                "security": [{"bearerAuth": []}],
+                "requestBody": {
+                  "required": true,
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/Resident"
+                      },
+                      "examples": {
+                        "resident": {
+                            "value": {
+                                "name": "Carlos Eduardo Da Silva Junior",
+                                "birth_date": "2023-05-03T14:30:00.000Z",
+                                "residence_number": 2,
+                                "floor": 1,
+                                "block": "A"
+                            }
+                        }
+                    } 
+                    }
+                  }
+                },
+                "responses": {
+                  "200": {
+                    "description": "Morador atualizado",
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "$ref": "#/components/schemas/Resident"
+                        }
+                      }
+                    }
+                  },
+                  "400": {
+                    "description": "Requisição inválida"
+                  },
+                  "401": {
+                    "description": "Não autorizado"
+                  },
+                  "404": {
+                    "description": "Morador não encontrado"
+                  },
+                  "500": {
+                    "description": "Erro interno do servidor"
+                  }
+                }
+            },
+            "delete": {
+                "summary": "Deleta um morador por id",
+                "description": "Rota para deletar um morador por id",
+                "tags": ["Residents"],
+                "parameters":[ 
+                  {
+                    "name": "id",
+                    "in": "path",
+                    "description": "Id do morador",
+                    "required": true
+                  }
+                ],
+                "security": [{"bearerAuth": []}],
+                "responses": {
+                  "204": {
+                    "description": "Morador deletado"
+                  },
+                  "401": {
+                    "description": "Não autorizado"
+                  },
+                  "404": {
+                    "description": "Morador não encontrado"
+                  },
+                  "500": {
+                    "description": "Erro interno do servidor"
+                  }
+                }
+            }
+        },
+        "/condominium": {
+            "post": {
+                "summary": "Cadastra condomínio",
+                "description": "Rota para cadastro de condomínio",
+                "tags": ["Condominium"],
+                "security": [{"baererAuth": []}],
+                "requestBody": { 
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Comdominium"
+                            },
+                            "examples": {
+                                "condominium": {
+                                    "value": {
+                                        "name": "Condomimio Flor do Amanhã",
+                                        "cep": "81925140",
+                                        "number": "2023-05-10T14:30:00.000Z"
+                                    }
+                                }
+                            } 
+                        }
+                    }
+                },
+                "responses": {
+                    "401": {
+                        "description": "Não autorizado"
+                    },
+                    "400": {
+                        "description": "Condominio já existe!"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "items": {
+                                    "$ref": "#/components/schemas/Comdominium"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/reservations": {
+            "post": {
+                "summary": "Cadastra reserva",
+                "description": "Rota para cadastro de reserva",
+                "tags": ["Reservation"],
+                "security": [{"baererAuth": []}],
+                "requestBody": { 
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Reservation"
+                            },
+                            "examples": {
+                                "reservation": {
+                                    "value": {
+                                        "area_id": "2",
+                                        "resident_id": "2",
+                                        "reserve_date": "2023-05-03T14:30:00.000Z"
+                                    }
+                                }
+                            } 
+                        }
+                    }
+                },
+                "responses": {
+                    "401": {
+                        "description": "Não autorizado"
+                    },
+                    "400": {
+                        "description": "Reserva já existe!"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "items": {
+                                    "$ref": "#/components/schemas/Reservation"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Resident": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "birth_date": {
+                        "type": "string"
+                    },
+                    "residence_number": {
+                        "type": "number"
+                    },
+                    "floor": {
+                        "type": "number"
+                    },
+                    "block": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Comdominium": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "cep": {
+                        "type": "string"
+                    },
+                    "number": {
+                        "type": "number"
+                    }
+                }
+            },
+            "Reservation": {
+                "type": "object",
+                "properties": {
+                    "area_id": {
+                        "type": "string"
+                    },
+                    "resident_id": {
+                        "type": "string"
+                    },
+                    "reserve_date": {
+                        "type": "number"
+                    }
+                }
+            }
+        }
+    },
+    "securitySchemas": {
+        "baererAuth": {
+            "type": "http",
+            "schema": "baerer",
+            "baererFormat": "JWT"
+        }
+    }
+}

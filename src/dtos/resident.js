@@ -21,7 +21,7 @@ const Resident = database.define('residents', {
         allowNull: false
     },
     floor: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.INTEGER
     },
     block: {
         type: Sequelize.STRING

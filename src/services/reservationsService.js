@@ -9,9 +9,9 @@ async function createReservationService(req) {
           'any.required': 'O campo name é obrigatório.'
         }),
         resident_id : Joi.string().required().messages({
-            'any.required': 'O campo resident_id é obrigatório.'
+          'any.required': 'O campo resident_id é obrigatório.'
         }),
-        reserve_date: Joi.number().required().messages({
+        reserve_date: Joi.string().required().messages({
           'any.required': 'O campo reserve_date é obrigatório.'
         })
       });

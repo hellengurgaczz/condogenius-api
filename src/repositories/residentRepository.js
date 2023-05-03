@@ -1,6 +1,7 @@
 const Resident = require('../dtos/resident');
 
 async function create(name, birth_date, residence_number, floor, block) {
+    console.log(name, birth_date, residence_number, floor, block)
     try {
         const resident = await Resident.create({
             name: name,
@@ -54,28 +55,30 @@ async function destroy(id) {
 }
 
 async function update(id, name, birth_date, residence_number, floor, block) {
-
     try {   
-        const result = Resident.update({
+        const [result] = await Resident.update(
+          {
             name: name,
             birth_date: birth_date,
             residence_number: residence_number,
             floor: floor,
             block: block
-          }, {
+          },
+          {
             where: { id: id }
-        });
-
+          }
+        );
+    
         if (result === 1) {
-            return {
-              message: 'Morador atualizado com sucesso.'
-            }
-          } else {
-            throw new Error('Morador não encontrado.')
+          return {
+            message: 'Morador atualizado com sucesso.'
+          };
+        } else {
+          throw new Error('Morador não encontrado.');
         }
-    } catch (error){
-        throw new Error('Falha ao atualizar morador.')
-    }
+      } catch (error) {
+        throw new Error('Falha ao atualizar morador: ', error);
+      }
 }
 
 
