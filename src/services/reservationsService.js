@@ -5,10 +5,10 @@ const Joi = require('joi');
 async function createReservationService(req) {
 
     const schema = Joi.object({
-        area_id: Joi.string().required().messages({
+        area_id: Joi.number().required().messages({
           'any.required': 'O campo name é obrigatório.'
         }),
-        resident_id : Joi.string().required().messages({
+        resident_id : Joi.number().required().messages({
           'any.required': 'O campo resident_id é obrigatório.'
         }),
         reserve_date: Joi.string().required().messages({

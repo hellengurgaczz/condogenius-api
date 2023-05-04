@@ -262,8 +262,8 @@
                             "examples": {
                                 "reservation": {
                                     "value": {
-                                        "area_id": "2",
-                                        "resident_id": "2",
+                                        "area_id": 2,
+                                        "resident_id": 2,
                                         "reserve_date": "2023-05-03T14:30:00.000Z"
                                     }
                                 }
@@ -333,10 +333,10 @@
                 "type": "object",
                 "properties": {
                     "area_id": {
-                        "type": "string"
+                        "type": "number"
                     },
                     "resident_id": {
-                        "type": "string"
+                        "type": "number"
                     },
                     "reserve_date": {
                         "type": "number"
