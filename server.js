@@ -24,21 +24,6 @@ server.use(
   })
 )
 
-// Configuração do Swagger
-// const swaggerOptions = {
-//     swaggerDefinition: {
-//       openapi: '3.0.0',
-//       info: {
-//         title: 'API Condogenius',
-//         description: 'API de gestão de condomínio Condogenius',
-//         version: '1.0.0',
-//       },
-//     },
-//     apis: [path.join(__dirname, '*.js')],
-//   };
-
-//   const swaggerSpec = swaggerJsdoc(swaggerOptions);
-
 server.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerJson));
 
 // Routes
