@@ -89,10 +89,9 @@ server.delete('/resident/:id', (req, res) => {
 
 server.put('/resident/:id', (req, res) => {
     try {
-        const response = residentService.updateResidentService(req)
+        residentService.updateResidentService(req)
         res.status(200).send({
             message: 'Morador atualizado com sucesso!',
-            data: response
         });
     } catch (error) {
         res.status(500).send({

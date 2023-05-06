@@ -29,7 +29,7 @@ async function createResidentService(req) {
     }
 
     var { name, birth_date, residence_number, floor, block  } = req.body;
-    const response = await residentRepository.create( name, birth_date, residence_number, floor = null, block = null )
+    const response = await residentRepository.create( name, birth_date, residence_number, floor, block )
     return response
 }
 
