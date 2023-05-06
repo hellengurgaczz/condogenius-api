@@ -75,10 +75,9 @@ server.get('/resident/:id', async (req, res) => {
 
 server.delete('/resident/:id', (req, res) => {
     try {
-        const response = residentService.deleteResidentService(req)
+        residentService.deleteResidentService(req)
         res.status(200).send({
             message: 'Morador deletado com sucesso.',
-            data: response
         });
     } catch (error) {
         res.status(500).send({
