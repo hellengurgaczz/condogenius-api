@@ -1,6 +1,7 @@
 require('dotenv').config();
 const axios = require('axios');
 const Joi = require('joi');
+const sendMessageToQueueService = require('../utils/services/sendMessageToQueue');
 
 async function createReservationService(req) {
 
@@ -24,8 +25,10 @@ async function createReservationService(req) {
     }
 
     try {
-        const response = await axios.post(`${process.env.API_CONDOGENIUS_RESERVATION}`, req.body)
-        return response.data
+        // envia pra fila 
+        sendMessageToQueueService.sendMessageToQueue()
+        // const response = await axios.post(`${process.env.API_CONDOGENIUS_RESERVATION}`, req.body)
+        // return response.data
     } catch(error) {
         throw new Error('Falha ao cadastrar reserva')
     }
