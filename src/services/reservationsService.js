@@ -3,6 +3,8 @@ const axios = require('axios');
 const Joi = require('joi');
 const sendMessageToQueueService = require('../utils/services/sendMessageToQueue');
 
+const reservationsQueue = 'reservations'
+
 async function createReservationService(req) {
 
     const schema = Joi.object({
@@ -26,7 +28,8 @@ async function createReservationService(req) {
 
     try {
         // envia pra fila 
-        sendMessageToQueueService.sendMessageToQueue()
+        console.log(req.body)
+        sendMessageToQueueService.sendMessageToQueue(req.body, reservationsQueue)
         // const response = await axios.post(`${process.env.API_CONDOGENIUS_RESERVATION}`, req.body)
         // return response.data
     } catch(error) {
