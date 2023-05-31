@@ -27,11 +27,8 @@ async function createReservationService(req) {
     }
 
     try {
-        // envia pra fila 
-        console.log(req.body)
         sendMessageToQueueService.sendMessageToQueue(req.body, reservationsQueue)
-        // const response = await axios.post(`${process.env.API_CONDOGENIUS_RESERVATION}`, req.body)
-        // return response.data
+        return 'Reserva enviada!'
     } catch(error) {
         throw new Error('Falha ao cadastrar reserva')
     }
