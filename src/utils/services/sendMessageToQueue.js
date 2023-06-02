@@ -2,7 +2,7 @@ require('dotenv').config();
 var amqp = require('amqplib');
 
 async function sendMessageToQueue(message, queue) {
-  console.log('Enviando mensagem para fila: ',queue)
+  console.log('Enviando mensagem para fila: ', queue)
     
   try {
     const connection = await amqp.connect('amqp://127.0.0.1:5672');

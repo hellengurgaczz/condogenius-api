@@ -18,9 +18,11 @@ async function create(name, birth_date, residence_number, floor, block) {
 }
 
 async function get(id) {
+  console.log(id)
     if(id) {
         try {
             const resident = await Resident.findByPk(id);
+            console.log(resident)
             return resident;
         } catch (error) {
             throw new Error('Falha ao buscar morador.')

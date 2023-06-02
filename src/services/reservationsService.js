@@ -2,6 +2,7 @@ require('dotenv').config();
 const axios = require('axios');
 const Joi = require('joi');
 const sendMessageToQueueService = require('../utils/services/sendMessageToQueue');
+const residentrepository = require('../repositories/residentRepository');
 
 const reservationsQueue = 'reservations'
 
@@ -26,8 +27,19 @@ async function createReservationService(req) {
         throw new Error(errorMessage);
     }
 
+
+    let resident = await residentrepository.get(req.body.resident_id)
+
+
+    const message = {
+      contact: resident.id,
+      residentName: resident.name,
+      reserveDate: req.body.reserve_date,
+      reservation: req.body
+    }
+
     try {
-        sendMessageToQueueService.sendMessageToQueue(req.body, reservationsQueue)
+        sendMessageToQueueService.sendMessageToQueue(message, reservationsQueue)
         return 'Reserva enviada!'
     } catch(error) {
         throw new Error('Falha ao cadastrar reserva')

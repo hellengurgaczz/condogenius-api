@@ -12,6 +12,10 @@ const Resident = database.define('residents', {
         type: Sequelize.STRING,
         allowNull: false
     },
+    contact: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
     birth_date: {
         type: Sequelize.DATE,
         allowNull: false
@@ -28,7 +32,6 @@ const Resident = database.define('residents', {
     }
 })
 
-// cria a tabela no banco de dados
 Resident.sync()
     .then(() => {
         console.log('Tabela residents criada com sucesso!');

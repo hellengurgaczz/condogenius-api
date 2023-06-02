@@ -19,12 +19,12 @@ const Condominium = database.define('comdominium', {
 })
 
 // cria a tabela no banco de dados
-Condominium.sync()
-    .then(() => {
-        console.log('Tabela comdominium criada com sucesso!');
-    })
-    .catch((error) => {
-        console.error('Erro ao criar tabela comdominium:', error);
-    });
+// Condominium.sync()
+//     .then(() => {
+//         console.log('Tabela comdominium criada com sucesso!');
+//     })
+//     .catch((error) => {
+//         console.error('Erro ao criar tabela comdominium:', error);
+//     });
  
 module.exports = Condominium;
