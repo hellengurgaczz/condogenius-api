@@ -9,6 +9,9 @@ const schema = Joi.object({
         'any.required': 'O campo birth_date é obrigatório.',
         'string.pattern.base': 'O campo birth_date deve conter 8 dígitos numéricos.'
     }),
+    contact: Joi.string().required().messages({
+        'any.required': 'O campo contato é obrigatório.'
+    }),
     residence_number: Joi.number().required().messages({
       'any.required': 'O campo residence_number é obrigatório.'
     }),
@@ -27,9 +30,9 @@ async function createResidentService(req) {
         const errorMessage = error.details.map((detail) => detail.message).join(' ');
         throw new Error(errorMessage);
     }
-
-    var { name, birth_date, residence_number, floor, block  } = req.body;
-    const response = await residentRepository.create( name, birth_date, residence_number, floor, block )
+    console.log(req.body)
+    var { name, birth_date, contact, residence_number, floor, block  } = req.body;
+    const response = await residentRepository.create( name, birth_date, contact, residence_number, floor, block )
     return response
 }
 
@@ -55,8 +58,8 @@ function updateResidentService(req) {
         const errorMessage = error.details.map((detail) => detail.message).join(' ');
         throw new Error(errorMessage);
     }
-    const { name, birth_date, residence_number, floor, block  } = req.body;
-    const response = residentRepository.update(req.params.id, name, birth_date, residence_number, floor, block)
+    const { name, birth_date, contact, residence_number, floor, block  } = req.body;
+    const response = residentRepository.update(req.params.id, name, birth_date, contact, residence_number, floor, block)
     return response
 }
 

@@ -1,11 +1,12 @@
 const Resident = require('../dtos/resident');
 
-async function create(name, birth_date, residence_number, floor, block) {
-    console.log(name, birth_date, residence_number, floor, block)
+async function create(name, birth_date, contact, residence_number, floor, block) {
+    console.log(name, birth_date, contact, residence_number, floor, block)
     try {
         const resident = await Resident.create({
             name: name,
             birth_date: birth_date,
+            contact: contact,
             residence_number: residence_number,
             floor: floor,
             block: block
@@ -13,6 +14,7 @@ async function create(name, birth_date, residence_number, floor, block) {
 
         return resident;
     } catch ( error ) {
+      console.log(error)
         throw new Error('Falha ao cadastrar morador.')
     }
 }
@@ -56,12 +58,13 @@ async function destroy(id) {
     }
 }
 
-async function update(id, name, birth_date, residence_number, floor, block) {
+async function update(id, name, birth_date, contact, residence_number, floor, block) {
     try {   
         const [result] = await Resident.update(
           {
             name: name,
             birth_date: birth_date,
+            contact: contact,
             residence_number: residence_number,
             floor: floor,
             block: block

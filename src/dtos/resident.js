@@ -13,8 +13,7 @@ const Resident = database.define('residents', {
         allowNull: false
     },
     contact: {
-        type: Sequelize.STRING,
-        allowNull: false
+        type: Sequelize.STRING
     },
     birth_date: {
         type: Sequelize.DATE,
